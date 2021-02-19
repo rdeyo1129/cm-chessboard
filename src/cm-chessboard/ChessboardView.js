@@ -237,12 +237,17 @@ export class ChessboardView {
         for (let i = 0; i < 64; i++) {
             const pieceName = squares[i]
             if (pieceName) {
-                this.drawPiece(i, pieceName)
+                if (pieceName.split('').splice(0, 1).join() === 'w') {
+                    this.drawPiece(i, pieceName, this.chessboard.props.whiteFaction)
+                }
+                if (pieceName.split('').splice(0, 1).join() === 'b') {
+                    this.drawPiece(i, pieceName, this.chessboard.props.blackFaction)
+                }
             }
         }
     }
 
-    drawPiece(index, pieceName) {
+    drawPiece(index, pieceName, pieceFaction) {
         // console.log(index, pieceName)
         const pieceGroup = Svg.addElement(this.piecesGroup, "g")
         pieceGroup.setAttribute("data-piece", pieceName)
@@ -251,7 +256,7 @@ export class ChessboardView {
         const transform = (this.svg.createSVGTransform())
         transform.setTranslate(point.x, point.y)
         pieceGroup.transform.baseVal.appendItem(transform)
-        const pieceUse = Svg.addElement(pieceGroup, "use", {"href": `${this.chessboard.props.sprite.url}#${pieceName}`, "class": "piece"})
+        const pieceUse = Svg.addElement(pieceGroup, "use", {"href": `${this.chessboard.props.sprite.url}#${pieceFaction}${pieceName}`, "class": "piece"})
         // center on square
         const transformTranslate = (this.svg.createSVGTransform())
         transformTranslate.setTranslate(this.pieceXTranslate, 0)
