@@ -185,10 +185,17 @@ export class ChessboardMoveInput {
         this.draggablePiece.setAttribute("height", this.view.squareHeight)
         this.draggablePiece.setAttribute("style", "pointer-events: none")
         this.draggablePiece.name = pieceName
-        const piece = Svg.addElement(this.draggablePiece, "use", {
-            href: `${this.props.sprite.url}#${pieceName}`
-        })
-        const scaling = this.view.squareHeight / this.props.sprite.size
+        if (pieceName.split('').splice(0, 1).join() === 'w') {
+            var piece = Svg.addElement(this.draggablePiece, "use", {
+                href: `${this.props.sprite.url}#${this.props.whiteFaction}${pieceName}`
+            })
+        }
+        if (pieceName.split('').splice(0, 1).join() === 'b') {
+            var piece = Svg.addElement(this.draggablePiece, "use", {
+                href: `${this.props.sprite.url}#${this.props.blackFaction}${pieceName}`
+            })
+        }
+        const scaling = this.view.squareHeight / this.props.sprite.grid
         const transformScale = (this.draggablePiece.createSVGTransform())
         transformScale.setScale(scaling, scaling)
         piece.transform.baseVal.appendItem(transformScale)
