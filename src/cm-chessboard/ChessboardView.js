@@ -301,6 +301,20 @@ export class ChessboardView {
 
     }
 
+    toggleVisibilities(whiteVis, blackVis, squares = this.chessboard.state.squares) {
+        for (let i = 0; i < 64; i++) {
+            const pieceName = squares[i]
+            if (pieceName) {
+                if (pieceName.split('').splice(0, 1).join() === 'w') {
+                    this.setPieceVisibility(index, whiteVis)
+                }
+                if (pieceName.split('').splice(0, 1).join() === 'b') {
+                    this.setPieceVisibility(index, blackVis)
+                }
+            }
+        }
+    }
+
     getPiece(index) {
         return this.piecesGroup.querySelector(`g[data-index='${index}']`)
     }

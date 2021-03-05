@@ -125,14 +125,14 @@ export class Chessboard {
                     } else {
                         this.state.setPosition(fen)
                     }
-                    if (animated) {
-                        this.view.animatePieces(prevSquares, this.state.squares.slice(0), () => {
-                            resolve()
-                        })
-                    } else {
-                        this.view.drawPiecesDebounced()
-                        resolve()
-                    }
+                    // if (animated) {
+                    //     this.view.animatePieces(prevSquares, this.state.squares.slice(0), () => {
+                    //         resolve()
+                    //     })
+                    // } else {
+                    //     this.view.drawPiecesDebounced()
+                    //     resolve()
+                    // }
                 } else {
                     resolve()
                 }

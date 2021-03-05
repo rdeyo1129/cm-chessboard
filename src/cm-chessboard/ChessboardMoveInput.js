@@ -130,17 +130,19 @@ export class ChessboardMoveInput {
                 }
                 this.endIndex = params.index
                 if (this.endIndex && this.moveDoneCallback(this.startIndex, this.endIndex)) {
-                    const prevSquares = this.state.squares.slice(0)
+                    // const prevSquares = this.state.squares.slice(0)
                     this.state.setPiece(this.startIndex, null)
                     this.state.setPiece(this.endIndex, this.movedPiece)
-                    if (prevState === STATE.clickTo) {
-                        this.view.animatePieces(prevSquares, this.state.squares.slice(0), () => {
-                            this.setMoveInputState(STATE.reset)
-                        })
-                    } else {
-                        this.view.drawPieces(this.state.squares)
-                        this.setMoveInputState(STATE.reset)
-                    }
+                    // if (prevState === STATE.clickTo) {
+                    //     this.view.animatePieces(prevSquares, this.state.squares.slice(0), () => {
+                    //         this.setMoveInputState(STATE.reset)
+                    //     })
+                    // } else {
+                    //     this.view.drawPieces(this.state.squares)
+                    //     this.setMoveInputState(STATE.reset)
+                    // }
+                    this.view.drawPieces(this.state.squares)
+                    this.setMoveInputState(STATE.reset)
                 } else {
                     this.view.drawPiecesDebounced()
                     this.setMoveInputState(STATE.reset)
