@@ -117,7 +117,7 @@ export class Chessboard {
                 const fenParts = fen.split(" ")
                 const fenNormalized = fenParts[0]
                 if (fenNormalized !== currentFen) {
-                    const prevSquares = this.state.squares.slice(0) // clone
+                    // const prevSquares = this.state.squares.slice(0) // clone
                     if (fen === "start") {
                         this.state.setPosition(FEN_START_POSITION)
                     } else if (fen === "empty" || fen === null) {
@@ -130,9 +130,10 @@ export class Chessboard {
                     //         resolve()
                     //     })
                     // } else {
-                    //     this.view.drawPiecesDebounced()
-                    //     resolve()
+                        
                     // }
+                    this.view.drawPiecesDebounced()
+                    resolve()
                 } else {
                     resolve()
                 }

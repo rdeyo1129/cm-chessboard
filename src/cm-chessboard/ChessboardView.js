@@ -267,7 +267,6 @@ export class ChessboardView {
     }
 
     drawPiece(index, pieceName, pieceFaction) {
-        // console.log(index, pieceName)
         const pieceGroup = Svg.addElement(this.piecesGroup, "g")
         pieceGroup.setAttribute("data-piece", pieceName)
         pieceGroup.setAttribute("data-index", index)
@@ -288,6 +287,7 @@ export class ChessboardView {
         const transformScale = (this.svg.createSVGTransform())
         transformScale.setScale(this.scalingY, this.scalingY)
         pieceUse.transform.baseVal.appendItem(transformScale)
+        this.setVisibility(pieceName, index, this.chessboard.props.whiteVisible, this.chessboard.props.blackVisible)
         return pieceGroup
     }
 
@@ -301,17 +301,12 @@ export class ChessboardView {
 
     }
 
-    toggleVisibilities(whiteVis, blackVis, squares = this.chessboard.state.squares) {
-        for (let i = 0; i < 64; i++) {
-            const pieceName = squares[i]
-            if (pieceName) {
-                if (pieceName.split('').splice(0, 1).join() === 'w') {
-                    this.setPieceVisibility(index, whiteVis)
-                }
-                if (pieceName.split('').splice(0, 1).join() === 'b') {
-                    this.setPieceVisibility(index, blackVis)
-                }
-            }
+    setVisibility(pieceName, index, whiteVisible, blackVisible, squares = this.chessboard.state.squares) {
+        if (pieceName.split('').splice(0, 1).join() === 'w') {
+            this.setPieceVisibility(index, whiteVisible)
+        }
+        if (pieceName.split('').splice(0, 1).join() === 'b') {
+            this.setPieceVisibility(index, blackVisible)
         }
     }
 
